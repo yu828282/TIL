@@ -97,7 +97,7 @@ Hypertext <u>Markup Language</u> : Markup Language 란 자료의 구조를 표�
     - inline; -> 컨텐츠 자체만 꾸미기
     - flex; -> 요소 가로정렬 (ex 11 이상부터 사용가능)
     - flex 세부속성
-    ```
+    ```css
     .flex-container {
         display : flex;
         justify-content : center;  /* 좌우정렬 */
@@ -117,7 +117,7 @@ Hypertext <u>Markup Language</u> : Markup Language 란 자료의 구조를 표�
     - 다음 HTML 요소들이 제자리를 찾지 못하므로 clear 속성이 필요하다.<br>
     `clear : both` 
 - 가운데 정렬 : 
-```
+```css
 .button {
   position : absolute; 
   left : 0;
@@ -129,7 +129,7 @@ Hypertext <u>Markup Language</u> : Markup Language 란 자료의 구조를 표�
 ```
 
 ## 단위
-```
+```css
 .box {
   width : 16px; /* 기본 px 단위 */
   width : 1.5rem; /* html태그 혹은 기본 폰트사이즈의 1.5배 */
@@ -153,12 +153,12 @@ Hypertext <u>Markup Language</u> : Markup Language 란 자료의 구조를 표�
 
 ## 폰트
 - Anti-aliasing : 픽셀의 각진 부분을 스무스하게 바꿔주면 부드럽게 표시된다.
-```
+```css
 transform : rotate(0.04deg); 
 ```
 
 ## 메타 태그, open graph, favicon
-```
+```html
 <head>
   <link rel="icon" href="경로.ico" type="image/x-icon">
   <meta charset="UTF-8">
@@ -174,7 +174,7 @@ transform : rotate(0.04deg);
 ## media query
 CSS 파일 최하단에 사용
 * 권장 : 1200px / 992px / 768px / 576px (보통 1200px 768px 두개만 사용)
-```
+```css
 @media screen and (max-width : 1200px) { 
   .box { 
     font-size : 40px; 
@@ -183,7 +183,7 @@ CSS 파일 최하단에 사용
 ```
 
 ## 익스플로러 버전용 CSS파일 첨부 (익스 9 미만에서만 적용하는 경우)
-```
+```html
 <!--[if lt IE 9]>
   <link rel="stylesheet" type="text/css" href="css/ie8.css" />
 <![endif]-->
@@ -204,7 +204,7 @@ Preprocessor (전처리언어). css 대신 사용하기도 한다.
 
 ## transform 
 @keyframes 을 이용해 커스텀 애니메이션 정의 가능
-```
+```css
 .box:hover {
   animation-name : movingmoving;
   animation-duration : 1s;
@@ -219,13 +219,13 @@ Preprocessor (전처리언어). css 대신 사용하기도 한다.
 ## Grid 레이아웃 (격자 레이아웃)
  - 만드는 방법 : 부모에 display : grid를 주면 자식 들은 전부 격자처럼 진열
 1. 자식 div 높이와 폭을 조정하기 
-```
+```css
   grid-column : 1 / 4; /*1~4번째 격자까지 차지*/
   grid-row : 2 / 4;
 ```
 
 2. 자식에게 이름쓰고 부모가 배치하기 
-```
+```css
   grid-area: 헤더;
   grid-area: 사이드;
 
@@ -239,7 +239,7 @@ Preprocessor (전처리언어). css 대신 사용하기도 한다.
 
 ## 부트스트랩
 - class 명을 이용해 css 조작
-```
+```html
 <div class="row">
   <p>PC에서는 4열, 태블릿에서는 2열, 모바일에서는 1열로 정렬</p>
   <div class="col-lg-3 col-md-6"> 안녕 </div>
@@ -248,7 +248,7 @@ Preprocessor (전처리언어). css 대신 사용하기도 한다.
   <div class="col-lg-3 col-md-6"> 안녕 </div>
 </div>
 ```
-```
+```html
 <div class="container ">
   <div class="row">
     <div class="col-2 col-md-2 order-md-2">
