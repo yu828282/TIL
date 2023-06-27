@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+    <style>
+      body{
+          background: #f7f9fc;
+      }
+      a {
+        color: #eee;
+        text-decoration: none;
+      }
+      .white-box {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0.5px 0.5px 2px 1px #eee;
+      height: 100%;
+      }
+      
+      .flip-outer {
+        width: 100px;
+        height: 100px;
+      }
+
+      .front {
+        width: 100%;
+        position: absolute; 
+        z-index : 1;  
+        backface-visibility: hidden; /*뒷면 안보이게 하기*/
+      }
+
+      .back {
+        width: 100%;
+        position: absolute;
+        transform: rotateY(180deg);
+        height: 100%;
+        border-radius: 50%;
+        text-align: center;
+        padding-top: 20px;
+        box-sizing: border-box;
+      } 
+
+      .flip-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: all 1s;
+        transform-style: preserve-3d; /*3d 사물처럼 동작*/
+      }
+
+      .flip-inner:hover {
+        transform: rotateY(180deg);
+      } 
+
+      .container{
+        margin-top: 15px;
+      }
+      .profile-pic{
+        width: 100px;
+        height: 100px;
+      }
+      .vr{
+        padding: 0;
+      }
+      .pill {
+      display: inline-block;
+      border: 1px solid lightgray;
+      border-radius: 100px;
+      padding: 3px 12px 5px 12px;
+      margin-right: 2px;
+      margin-bottom: 5px;
+    }
+    .ani-button:hover{
+      animation-name: shake;
+      animation-duration : 1s;
+    }
+    .round-img{
+    border-radius: 70%;
+    }
+    .overlay {
+    position: absolute;
+    background: black;
+    width: 100%;
+    height: 100%;
+    opacity: 0;    
+    border-radius: 70%;
+    transition: all 1s;
+    /* transition-timing-function: cubic-bezier(1, -0.08, 0.95, 0.1) */
+  }
+  
+  .overlay:hover {
+    opacity: 0.5;
+    border-radius: 70%;
+  }
+  .overlay-wrap{
+    position : absolute;
+    width : 100%;
+    height : 100%;
+    overflow : hidden;
+  }
+  .overlay-black{
+    width : 100%;
+    height : 100%;
+    box-sizing: border-box;
+    background : rgba(0,0,0,0.3);
+    transition: all 1s;
+    margin-top : 100%;
+  }
+  .overlay-wrap:hover .overlay-black {
+    margin-top : 50%;
+  }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg)}
+      25% { transform: rotate(-4deg)}
+      50% { transform: rotate(4deg)}
+      75% { transform: rotate(-4deg)}
+      100% { transform: rotate(0deg)}
+    }
+    </style>
+    <div class="container">
+      <div class="white-box">
+        <div class="row">
+          <div class="col-md-6">
+           <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <div class="flip-outer">
+                <div class="flip-inner">
+                  <img src="profile.jpg" alt="프로필사진" class="profile-pic front">
+                  <div class="back">
+                    <h4>공부중</h4>
+                    <p>Developing</p>
+                  </div>
+                </div>
+              </div> 
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h3>Yuri Choi</h3>
+              <p>Front-end 공부중</p>
+              <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+              </svg>서울
+              </p>
+              <button class="btn btn-primary ani-button"><a href="mailto:enyu0311@gmail.com">메일보내기</a></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" style="border-left : 1px solid #6c757d; padding: 20px;">      
+          <div class="row">
+            <div class="col-6"> <p>Area</p> </div> 
+            <div class="col-6"> <p>Seoul, Korea</p> </div> 
+            <div class="col-6"> <p>Age</p> </div> 
+            <div class="col-6"> <p>많음</p> </div>
+            <div class="col-6"> <p>School</p> </div> 
+            <div class="col-6"> <p>Master Degree</p> </div>
+            <div class="col-6"> <p>Experience</p> </div> 
+            <div class="col-6"> <p>신입?</p> </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="white-box">
+        <h4>Works</h4>
+        <p>since 2015 ~</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="white-box">
+        <h4>About</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, fuga neque voluptatem fugiat id labore. Quaerat delectus asperiores, tempora accusantium aut fugit numquam eius cum facere quis ad nobis deserunt.</p>
+        <hr>
+        <h4>skill</h4>
+        <span class="pill">HTML</span>
+        <span class="pill">CSS</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">Python</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="white-box">        
+        <h4>People</h4>
+        <div class="d-flex" style="font-size: 12px;">
+          <div class="flex-shrink-0">
+            <img src="profile.jpg" class="mt-2" width="60px">
+          </div>
+          <div class="flex-grow-1 ms-3 py-2">
+            <h6 class="mb-0">Jay Kim</h6>
+            <p class="mb-2 width">CTO</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              </svg> 서울</p>
+          </div>
+        </div>
+        <div class="d-flex" style="font-size: 12px;">
+          <div class="flex-shrink-0">
+            <img src="profile.jpg" class="mt-2" width="60px">
+          </div>
+          <div class="flex-grow-1 ms-3 py-2">
+            <h6 class="mb-0">Kim</h6>
+            <p class="mb-2 width">CTO</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              </svg> 서울</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container ">
+  <div class="row">
+    <div class="col-2 col-md-2 order-md-2">    
+      <div style="position: relative;">
+        <div class="overlay"></div>
+          <img class="round-img" src="profile.jpg" width="100%">
+      </div>      
+    </div>
+    <div class="col-10 col-md-5">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, officiis corporis? Impedit quo animi laboriosam voluptates iure praesentium veniam quis, debitis nostrum nemo laudantium non dolore commodi, similique fugit? Officia!</p>
+    </div>
+    <div class="col-md-5 order-md-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-2 col-md-2 order-md-2 order-xs-1">    
+      <div style="position: relative;">
+        <div class="overlay-wrap"><div class="overlay-black"><span>스터디</span></div></div>
+        <img src="profile.jpg" width="100%">
+      </div>      
+    </div>
+    <div class="col-10 col-md-5 order-md-3">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro maiores possimus dicta nihil quae molestias, sit quibusdam natus magni corrupti optio perferendis exercitationem voluptatibus harum provident sequi, assumenda iure magnam?</p>
+    </div>
+    <div class="col-md-5 order-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-2 col-md-2 order-md-2">     
+      <div style="position: relative;">
+        <div class="overlay"></div>
+          <img class="round-img" src="profile.jpg" width="100%">
+      </div>      
+    </div>
+    <div class="col-10 col-md-5">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, officiis corporis? Impedit quo animi laboriosam voluptates iure praesentium veniam quis, debitis nostrum nemo laudantium non dolore commodi, similique fugit? Officia!</p>
+    </div>
+    <div class="col-md-5 order-md-3"></div>
+  </div>
+</div>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>
