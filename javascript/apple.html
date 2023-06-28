@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="apple.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+</head>
+<body>
+  <div class="card-background">
+      <div class="card-box">
+        <img src="card1.png">
+      </div>
+      <div class="card-box">
+        <img src="card2.png">
+      </div>
+      <div class="card-box">
+        <img src="card3.png">
+      </div>
+    </div>
+    <script>
+      $(window).scroll(function(){
+          var 높이 = $(window).scrollTop();
+          console.log(높이);
+          
+          var y = -1/500 * 높이 + 115/50;  //높이가 650~1150 일때 투명도 1~0으로
+          $('.card-box').eq(0).css('opacity', y);
+
+          var z = (-1/5000) * 높이 + 565/500; //높이가 650~1150 일때 크기 1~0.9으로
+          $('.card-box').eq(0).css('transform', `scale( ${z} )`);
+      });
+    </script>
+</body>
+</html>

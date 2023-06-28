@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="slide.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <title>Document</title>
+</head>
+<body>
+  <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1.png" draggable="false">
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" draggable="false">
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" draggable="false">
+        </div>
+      </div>
+      <button class="before">이전</button>
+      <button class="slide-1">1</button>
+      <button class="slide-2">2</button>
+      <button class="slide-3">3</button>
+      <button class="next">다음</button>
+    </div> 
+  <script>
+    var now_pic = 1;
+
+    $('.slide-2').on('click', function() {
+    $('.slide-container').css('transform', 'translateX(-100vw)');
+    now_pic = 2;
+      });
+    $('.slide-3').on('click', function() {
+    $('.slide-container').css('transform', 'translateX(-200vw)');
+    now_pic = 3;
+      });
+    $('.slide-1').on('click', function() {
+    $('.slide-container').css('transform', 'translateX(-0vw)');
+    now_pic = 1;
+      });
+
+    $('.next').on('click', function(){
+      if (now_pic ==1) {
+      $('.slide-container').css('transform', 'translateX(-' + now_pic + '00vw)');
+      now_pic = 2;
+      }else if (now_pic ==2) {
+      $('.slide-container').css('transform', 'translateX(-' + now_pic + '00vw)');
+      now_pic = 3;
+      }else{
+      $('.slide-container').css('transform', 'translateX(-0vw)');
+      now_pic = 1;
+    }})
+    
+    $('.before').on('click', function(){
+      if (now_pic ==1) {
+      $('.slide-container').css('transform', 'translateX(-200vw)');
+      now_pic = 3;
+      }else if (now_pic ==2) {
+      $('.slide-container').css('transform', 'translateX(-0vw)');
+      now_pic = 1;
+      }else{
+      $('.slide-container').css('transform', 'translateX(-100vw)');
+      now_pic = 2;
+    }})
+  // 마우스를 끌어다 놓았을 때 다음 이미지로 넘어가게도 할 수 있다.
+    let 시작좌표 = 0;
+    let 클릭여부 = false; // 함수 밖에서 사용가능한 전역변수 생성
+
+    $('.slide-box').eq(0).on('mousedown', function(e){
+      시작좌표 = e.clientX;
+      클릭여부 = true; 
+    });
+
+    $('.slide-box').eq(0).on('mousemove', function(e){
+      console.log(e.clientX - 시작좌표)
+      if (클릭여부 === true){
+        $('.slide-container').css('transform', `translateX( ${e.clientX - 시작좌표}px )`)
+      }
+    });
+
+    $('.slide-box').eq(0).on('mouseup', function(e){
+      클릭여부 = false; 
+
+      if (e.clientX - 시작좌표 < -100) {
+        $('.slide-container').css('transition', 'all 0.5s').css('transform', 'translateX(-100vw)');
+      } else {
+        $('.slide-container').css('transition', 'all 0.5s').css('transform', 'translateX(0vw)');
+      } 
+      setTimeout(()=>{
+        $('.slide-container').css('transition', 'none')//이동이 끝나면 트렌지션 제거해야 느려지지 않는다
+      }, 500)
+    });
+
+  </script>
+</body>
+</html>

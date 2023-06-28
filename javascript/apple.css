@@ -1,0 +1,17 @@
+.card-background {
+    height: 3000px;
+    margin-top: 800px;
+    margin-bottom: 1600px;
+  }
+  
+  .card-box img {
+    display: block;
+    margin: auto;
+    max-width: 80%;
+  }
+  .card-box {
+    position: sticky;
+    top: 400px;  /*뷰포인트 맨위에서 400px에서부터 고정된다*/
+    margin-top: 200px;
+    transition: all 0.2s;
+  }
