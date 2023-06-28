@@ -355,3 +355,16 @@ var 꺼낸거 = localStorage.getItem('num');
 console.log(꺼낸거);
 ```
 
+# 기타
+1. npm : js라이브러리 관리 도와주는 패키지매니저. nodejs 설치시 딸려옴
+2. nodejs : 브라우저 안켜고 자바스크립트 실행
+3. bundling tool : js파일들 하나로 합쳐줌 + 최신 문법을 호환성 좋게 바꿔줌
+   - vite, turbopack...
+4. build : 번들링 툴로 js 파일을 하나로 합치는 것
+5. spa : 새로고침 없이 부드럽게 동작하는 페이지. 
+    - 리엑트, 뷰... : 변수관리 어려움. 구글검색결과 노출 어려움. 첫페이지 로딩시간이 길다.
+6. state management : 변수 관리하는 것
+7. server side rendering : html을 서버에서 만들어서 보내줌
+8. typescript : 타입기능이 업그레이드 된 자바스크립트
+9. serverless : 서버역할 대신 해주는 서비스
+    - firebase, supabase, aws lambda pocketbase
