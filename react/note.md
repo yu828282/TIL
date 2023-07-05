@@ -136,6 +136,21 @@ console.log(newArray) //  [20, 30, 40] 이 출력
 ```html
 <div className="list" key={i}> 
 ```
+- 두번째 파라미터 사용 가능
+```html
+<div className="row">
+  <Card shoes={shoes[0]} i={1} />
+  <Card shoes={shoes[1]} i={2} />
+  <Card shoes={shoes[2]} i={3} />
+</div>
+(위와 동일)
+<div className="row">
+   { shoes.map((a, i)=>{
+     return <Card shoes={shoes[i]} i={i} ></Card>
+    })}
+</div>
+```
+
 
 ## props
 - 부모 컴포넌트의 state를 자식 state로 전달
