@@ -146,7 +146,7 @@ console.log(newArray) //  [20, 30, 40] 이 출력
 (위와 동일)
 <div className="row">
    { shoes.map((a, i)=>{
-     return <Card shoes={shoes[i]} i={i} ></Card>
+     return <Card shoes={shoes[i]} i={i+1} ></Card>
     })}
 </div>
 ```
