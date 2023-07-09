@@ -404,3 +404,82 @@ function App(){
 - 처리결과는 let state에 저장
 
 ## PWA
+- 모바일 앱처럼 개발할 수 있는 기술 
+### 장점
+1. 앱처럼 설치 가능
+2. 오프라인에서도 동작 가능
+3. 웹사이트에서 바로 설치유도 가능
+
+### 발행
+- 파일 2개 (manifest.json, service-worker.js)가 사이트 로컬경로가 있으면 브라우저가 pwa로 인식
+- https 사이트여야 함
+- 기본 프로젝트를 npm build / yarn build 했을 경우 manifest.json 파일만 생성된
+```
+//2개 파일 모두 자동 생성 방법
+ npx create-react-app 프로젝트명 --template cra-template-pwa
+```
+1. 위 명령어로 프로젝트 생성
+2. 기존 프로젝트의  App.js App.css index.js... 새 프로젝트로 복붙
+3. 기존 라이브러리 재설치
+4. index.js 변경
+```javascript
+(index.js)
+//serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();
+```
+5. yarn build / npm run build 했을 때 manifest.json과 service-worker.js 파일이 자동으로 생성
+
+- manifest.json : 아이콘, 이름, 테마색 결정
+- service-worker.js : 구동에 필요한 파일 설치 설치 여부 결정
+    - 앱을 켤때마다  Cache Storage 내 파일을 사용 (오프라인에서도 사용가능)
+  
+### 디버깅
+1. build 폴더를 에디터로 오픈
+2. index.html 우클릭 -> live server로 띄우기
+3. 크롬 개발자도구 -> Application 탭 -> manifest/serving workers에서 파일 확인
+
+## sync / async
+- 일반적인 자바스크립트는 synchronous(동기적으로)하게 순서대로 처리
+- 일부 함수는 asynchronous(비동기적으로) 처리된다
+    - 예) ajax, 이벤트리스너, setTimeout, state 변경함수... (물리적으로 잠깐 처리가 보류)
+- 버튼을 누를때마다 버튼을 누른 횟수 +1, age state에 +1, 버튼 3번 누르면 age +1 종료 
+```javascript
+function App(){
+  let [count, setCount] = useState(0);
+  let [age, setAge] = useState(20);
+
+  return (
+    <div>
+      <div>안녕하십니까 전 {age} 살 입니다</div>
+      <button onClick={()=>{
+        setCount(count+1);
+        if ( count < 3 ) {
+          setAge(age+1);
+         } }}>+</button> //state 변경함수의 비동기 처리방식 때문 count가 3인데도 코드가 작동된다.
+    </div>
+  )
+}
+```
+- 해결방법?
+```javascript
+function App(){
+  let [count, setCount] = useState(0);
+  let [age, setAge] = useState(20);
+ //count 변경 후 age 변경되도록 useEffect 설정
+useEffect(()=>{
+  if ( count != 0 && count < 3 ) { //처음 페이지 로드될 때에는 실행되지 않도록 하기 
+    setAge(age+1)
+  }
+ }, [count]) 
+
+  return (
+    <div>
+      <div>안녕하십니까 전 {age} 살 입니다</div>
+      <button onClick={()=>{
+        setCount(count+1);
+      }}>+</button> //state 변경함수의 비동기 처리방식 때문 count가 3인데도 코드가 작동된다.
+    </div>
+  )
+}
+```
+
