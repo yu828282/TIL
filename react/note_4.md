@@ -483,3 +483,113 @@ useEffect(()=>{
 }
 ```
 
+## 서버에서 리엑트 사용
+### 임시서버 생성(Nodejs + Express)
+1. nodejs 설치
+2. 작업폴더만들고 에디터로 오픈
+3. server.js 파일을 만들고 아래 코드 작성
+```javascript
+const express = require('express');
+const path = require('path');
+const app = express();
+
+app.listen(8080, function () {
+  console.log('listening on 8080')
+}); 
+```
+4. 터미널을 열어서 npm init -y 입력
+5. npm install express 이것도 입력
+6. 터미널열어서 nodemon server.js를 입력 (또는 node server.js 입력)
+
+## 리엑트는 html을 부드럽게 동작하게 해준다
+-  Single Page Application(SAP) : 새로고침 없이 부드럽게 전환되는 사이트
+
+### 서브폴더로 프로젝트 생성방법
+0. nodejs 최신버전 설치
+1. 터미널에 npx create-react-app 프로젝트명 (프로젝트명에 띄어쓰기 불가) 
+2. 서브폴더에 생성된 프로젝트를 다시 에디터로 오픈
+3. 리액트로 코드 작성 ( npm run start으로 미리보기)
+4. npm run build를 입력하면 리액트 완성본 html 파일이 build 폴더내에 생성
+5. 그 html 파일을 서버에서 필요할 때 유저에게 보내주면 끝
+
+### 리엑트로 만든 html 전송방법
+- server.js 옆에 react-project란 프로젝트 생성
+```javascript
+(server.js에 추가)
+app.use(express.static(path.join(__dirname, 'react-project/build'))); //해당 파일을 static 파일로 보낸다
+
+app.get('/', function (요청, 응답) {
+  응답.sendFile(path.join(__dirname, '/react-project/build/index.html'));
+});
+```
+
+### 리액트에서 라우팅을 담당하는 경우
+- 서버에서 혹은 리엑트에서도 라우팅 담당 가능
+- localhost:8080/list 로 직접 URL 입력해서 접속시 페이지가 뜨지 않는다(서버에게 요청한 것이므로)
+- 리엑트가 라우팅하게 한다면 다음 코드 추가
+```javascript
+(server.js에 추가)
+
+app.get('*', function (요청, 응답) {
+  응답.sendFile(path.join(__dirname, '/react-project/build/index.html'));
+}); // 항상 하단에 놓아야 잘 동작한
+```
+
+### 리액트에서 DB데이터 보여주고 싶으면?
+- server-side rendering / client-side rendering 둘 중 하나 선택
+  
+- server-side rendering : html을 서버가 만들어서 보냄
+1. DB에서 데이터 뽑아서
+2. 글목록.html 파일에 꽂아넣고
+3. 그 html 파일을 서버에서 보내주는 것
+
+- client-side rendering : html을 리엑트가 브라우저안에서 만들어서 보냄
+1. 리액트가 서버에 GET요청으로 DB데이터를 가져와서
+2. 그걸 html로 만들어서 보여주는 것
+
+- 리엑트는 client-side rendering를 주로 한다 (거의 ajax로 진행)
+1. 서버: 누군가 /product로 GET요청을 하면 DB에서 데이터 꺼내서 보내주라고 API를 짜놓는다
+2. 리액트: 상품목록을 보여주고 싶을 때 서버 /product 주소로 GET요청을 보낸다
+3. 받은 데이터를 가지고 html에 집에 넣는다
+
+- 리액트와 nodejs 서버간 ajax 요청 잘되게 하는 법
+1. 서버프로젝트 터미널에서 npm install cors 설치
+2. 다음 코드를 nodejs 서버파일 상단에 넣기
+```javascript
+
+app.use(express.json()); // express.json() 은 유저가 보낸 array/object 데이터를 출력해보기 위해 필요
+var cors = require('cors'); // cors는 다른 도메인주소끼리 ajax 요청 주고받을 때 필요
+app.use(cors());
+```
+
+### 코드 수정할 때마다 build 작업 필요?
+- 사이트를 aws, google cloud 이런 곳에 발행할 때만 한 번 해주면 된다
+- 다만 리액트 -> 서버 ajax 요청시 /product 이렇게 말고 http://서버주소/product 잘 입력하고
+- 서버에 cors 옵션을 잘 켜놓아야 한다
+- 서버주소 입력이 귀찮을 때 참고 : https://create-react-app.dev/docs/proxying-api-requests-in-development/
+
+### 서브디렉토리에 리엑트앱 발행하고 싶은 경우
+- /react 이렇게 접속하면 리액트로 만든 html, / 이렇게 접속하면 public 폴더에 있던 그냥 main.html을 보여주고 싶을 때
+
+```javascript
+(server.js)
+
+app.use( '/', express.static( path.join(__dirname, 'public') ))
+app.use( '/react', express.static( path.join(__dirname, 'react-project/build') ))
+
+app.get('/', function(요청,응답){
+  응답.sendFile( path.join(__dirname, 'public/main.html') )
+}) 
+app.get('/react', function(요청,응답){
+  응답.sendFile( path.join(__dirname, 'react-project/build/index.html') )
+})
+
+
+(리액트프로젝트 내의 package.json)
+{
+  "homepage": "/react",
+  "version": "0.1.0",
+  ... 등
+} 
+
+```
