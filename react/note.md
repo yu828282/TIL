@@ -136,26 +136,10 @@ console.log(newArray) //  [20, 30, 40] 이 출력
 ```html
 <div className="list" key={i}> 
 ```
-- 두번째 파라미터 사용 가능
-```html
-<div className="row">
-  <Card shoes={shoes[0]} i={1} />
-  <Card shoes={shoes[1]} i={2} />
-  <Card shoes={shoes[2]} i={3} />
-</div>
-(위와 동일)
-<div className="row">
-   { shoes.map((a, i)=>{
-     return <Card shoes={shoes[i]} i={i+1} ></Card>
-    })}
-</div>
-```
-
 
 ## props
 - 부모 컴포넌트의 state를 자식 state로 전달
   - 다양한 컴포넌트에서 쓰이는 state는 최고 부모 컴포넌트에 만들어두기! (APP 컴포넌트)
-  - 자식 컴포넌트의 state를 부모 컴포넌트로 전달하거나, 다른 자식 컴포넌트로 전달하는 건 불가능하다
 - state 외에도 일반 변수, 함수 전송도 가능
 - 일반 문자는 중괄호 없이 전송
 
@@ -181,3 +165,44 @@ function Modal(props){
 ## 기타
 - 페이지 로드 빠르게 하기 : 컴포넌트들을 lazy하게 로딩
 https://legacy.reactjs.org/docs/code-splitting.html#route-based-code-splitting
+
+
+## Publishing
+### gh-pages
+- 깃허브에 해당 페이지 업로드
+0. 깃허브 repository 생성, 연결 
+```javascript
+git remote add origin "repository url"
+```
+1. 터미널에서 설치
+```
+npm i gh-pages
+```
+2. 다음 코드 추가
+```javascript
+(pakages.json 하단)
+,
+"homepage" : "https://깃허브유저네임.github.io/리포지토리이름"
+}
+```
+```javascript
+(pakages.json scripts 코드 하단)
+"deploy":"gh-pages -d build",
+"predeploy" : "npm run build"
+```
+3. 작업코드 업로드
+  ```
+  git add .
+  git commit -m "first commit"
+  git branch -M main
+  git push -u origin main
+  ```
+4. 다음 코드 실행
+- 압축된 build 페이지를 깃허브에 push
+```
+npm run deploy
+```
+- Pages 섹션의 branch가 'main'으로 되어 있다면, gh-pages로 변경
+
+5. 페이지 접속해보기
+https://깃허브유저네임.github.io/리포지토리이름
