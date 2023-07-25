@@ -107,6 +107,7 @@ npx expo start
 - 누르는 이벤트를 listen 할 수 있는 view
   - onPressIn : 손가락이 영역에 들어갔을 떄
   - onPressOut : 손가락이 그 영역에서 벗어났을 때
+  - onPress = onPressIn + onPressOut : 손가락을 누르고 뗀 순간
 - https://reactnative.dev/docs/touchablehighlight
 ### TouchableOpacity
 - 눌렀을 때 투명도 설정가능
@@ -170,6 +171,83 @@ Object.assign({}, toDos, {[Date.now()]:{Work:true}})
 //{work:true}
 //(...)
 ```
-### Object로 map 쓰는 법
-- Object.keys(object 이름) => key들을 array로 반환
-- 즉 Object.keys(object 이름).map()으로 사용
+## es6 사용(object assign이 이해가 되지 않는다면...)
+```javascript
+const newToDos = { 
+  ...toDos,  // toDos내용을 가진 새 object 생성,
+  [Date.now()]: { text, work: working }, 
+  }; 
+```
+### Object로 map 쓰는 법 
+- Object.keys(object 이름) : key값들만 모아서 array로 반환
+- Object.keys(object 이름).map()으로 사용
+
+## ...(spread operator, rest operator)
+- 자바스크립트 문법
+- spread operator : object, array 내부 값을 전개한다 
+```javascript
+const numbers1 = [1, 2, 3, 4, 5];
+const numbers2 = [ ...numbers1, 1, 2, 6, 7, 8]; 
+// 결과 [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
+```
+- rest operator : 함수의 파라미터들(arguments)을 array 형태로 전달
+```javascript
+function sum(...numbers) {
+	return numbers.reduce((accumulator, current) => {
+		return accumulator += current;
+	});
+};
+ 
+sum(1,2) // 3
+sum(1,2,3,4,5) // 15
+```
+
+- 삭제 함수에 사용
+```javascript
+(바른 복사방식)
+const newToDos = {...toDos} // 새 객체에 기존 객체 내용 복사
+
+(잘못된 복사방식)
+const newToDos = todo //참조값을 복사하므로 이후 내용을 변경해도 state 변경이 되지 않는다 = rerender 안된다
+
+```
+
+## AsyncStorage
+- https://docs.expo.dev/versions/latest/sdk/async-storage/
+- 브라우저의 local storage 처럼 작동한다
+- string 형태만 저장가능
+
+### 설치
+```javascript
+npx expo install @react-native-async-storage/async-storage
+```
+- expo install은 기본적으로 npm install을 실행시킨다
+- expo install은 사용중인 expo 버전과 같은 버전 모듈을 설치
+
+### 사용
+- await AsyncStorage.setItem 작성
+- @key와 value(string 타입) 작성
+```javascript
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const saveToDos = async (toSave) => {
+    await AsyncStorage.setItem("@toDos", JSON.stringify(toSave));
+  };
+```
+
+#### async & await
+- 자바스크립트의 비동기 처리 패턴
+- async : 함수 앞에 붙이는 예약어 
+```javascript
+async function 함수명() {
+  await 비동기_처리_메서드_명(); // 비동기_처리_메서드는 반드시 프로미스 객체를 반환
+}
+```
+
+## Alert API
+- alert() : 제목, 메시지, 버튼 
+- https://reactnative.dev/docs/alert
+- prompt() : ios에서만 작동.
+
+## icon 첨부
+- https://icons.expo.fyi/Index
