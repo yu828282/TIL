@@ -251,3 +251,23 @@ async function 함수명() {
 
 ## icon 첨부
 - https://icons.expo.fyi/Index
+
+## 발행
+```javascript
+npm install -g eas-cli
+eas build
+eas update
+// (git 연동)
+// (expo 사이트) > Settings > Public
+// 우측 Profile > 생성한 프로젝트 > Advanced Options
+// EAS Update 와 Expo Go, 브랜치명 선택. SDK version = 48.0.0
+```
+### 앱 만들기
+- https://docs.expo.dev/build/setup/
+```javascript
+eas build -p android
+// (나머지 기본값 설정)
+
+eas build --platform ios
+// (나머지 기본값 설정)
+```
