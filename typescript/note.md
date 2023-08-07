@@ -12,12 +12,25 @@ npm install -g typescript
 ```
 3. 작업폴더 생성 후 에디터로 오픈
 4. .ts 형식의 파일 만들기
-5. tsconfig.json 생성
+5. tsconfig.json 생성 ( .ts 파일들을 .js 파일로 변환할때 옵션 설정이 가능)
+```javascript
+{
+    "compilerOptions": {
+        "target": "es5", // 'es3', 'es5', 'es2015', 'es2016', 'es2017','es2018', 'esnext' 가능
+        "module": "commonjs", //무슨 import 문법 쓸건지 'commonjs', 'amd', 'es2015', 'esnext'
+    }
+}
+// es5 버전 자바스크립트로 컴파일(변환)
+// 'module'은 자바스크립트 파일간 import 문법을 구현할 때 어떤 문법을 쓸지 정하는 곳 (require 문법 사용)
+```
+ - 추가로 넣을만한 것
 ```javascript
 {
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
+        "noImplicitAny": true,  // any 타입 발생시 에러 띄워주기
+        "strictNullChecks": true // null, undefined 타입관련 에
     }
 }
 ```
