@@ -57,6 +57,8 @@ let 이름 :string = 'kim'; // 문자만 들어올 수 있다
 let 이름 :string[] = ['kim', 'park'] //array 안에 string 만 들어올 수 있다
 
 let 나이 :{ name : string } = { age : number }
+let 내정보 : { age : number } = { age : 20 }
+var 좋아하는거 :{ song :string, singer :string } = { song : '사랑하기때문에', singer : '유재하' }
 
 let 나이 :{ name? : string } = { } //name 속성은 옵션
 
@@ -110,5 +112,29 @@ class Person {
   constructor(name :string){
     this.name = name;
   }
+}
+```
+## 문법 팁
+- 변수 생성시 타입스크립트가 자동으로 타입 부여
+- 간단한 변수는 생략하는 것이 좋다
+
+## 연습문제
+```javascript
+let project = {
+  member : ['kim', 'park'],
+  days : 30,
+  started : true,
+}
+```
+- 정
+```javascript
+let project :{
+  member : string[],
+  days : number,
+  started : boolean,
+} = {
+  member : ['kim', 'park'],
+  days : 30,
+  started : true,
 }
 ```
