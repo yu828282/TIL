@@ -12,7 +12,16 @@ npm install -g typescript
 ```
 3. 작업폴더 생성 후 에디터로 오픈
 4. .ts 형식의 파일 만들기
-5. js 파일로 변환하려면 새 터미널을 열고 tsc-w 입력
+5. tsconfig.json 생성
+```javascript
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+    }
+}
+```
+6. js 파일로 변환하려면 새 터미널을 열고 tsc-w 입력
 ```javascript
 <script src="변환된파일.js"></script>
 ```
@@ -27,23 +36,28 @@ npm install --save typescript @types/node @types/react @types/react-dom @types/j
 npx create-react-app my-app --template typescript
 ```
 
-## 문법
+## 문법정리
 ```javascript
-let 이름 :string = 'kim';
-이름 = 123;
-let 이름 :string[] = ['kim', 'park']
-let 나이 :{ age : number } = { age : number }
-let 이름 :string | number = 'kim';
-type nameType = string | number;
-let 이름 :nameType = 'kim';
-type NameType = 'kim' | 'park;
+let 이름 :string = 'kim'; // 문자만 들어올 수 있다
+이름 = 123; // 에러
+
+let 이름 :string[] = ['kim', 'park'] //array 안에 string 만 들어올 수 있다
+
+let 나이 :{ name : string } = { age : number }
+
+let 나이 :{ name? : string } = { } //name 속성은 옵션
+
+let 이름 :string | number = 'kim'; //string 혹은 number 다 들어올 수 있다
+
+type NameType = string | number; // 타입을 변수로 저장 가능
 let 이름 :NameType = 'kim';
-function 함수명(x :number) :number{
+
+function 함수명(x :number) :number{ // x는 number, return은 number 
   return x * 2
 }
 
 //에러
-function 함수명(x :number | string) {
+function 함수명(x :number | string) { 
   return x * 2
 }
 
@@ -54,27 +68,32 @@ function 함수명(x :number | string) {
   } 
 }
 
-type Member = [number, boolean];
+// array에 쓸 수 있는 tuple 타입
+type Member = [number, boolean]; //무조건 첫번째는 number, 두번째는 boolean
 let john:Member = [100, false]
 
 type MyObject = {
   name? : string,
   age : number
 }
+
 let 철수 :MyObject = { 
   name : 'kim',
   age : 50
 }
 
+// object 타입 지정해야할 속성이 너무 많으면
 type MyObject = {
-  [key :string] : number,
+  [key :string] : number, // 글자로 된 모든 object 속성의 타입은 number
 }
 let 철수 :MyObject = { 
   age : 50,
   weight : 100,
 }
+
+// class 타입 지정해야할 속성이 너무 많으면
 class Person {
-  name;
+  name :string;
   constructor(name :string){
     this.name = name;
   }
