@@ -287,3 +287,66 @@ let 버튼 = document.getElementById('button');
   console.log('안녕')
 }) 
   ```
+
+
+## class 타입지정
+```javascript
+class Person {
+  data :number = 0;
+}
+
+let john = new Person();
+john.data = '1';  //에러
+```
+
+## constructor 타입지정 
+```javascript
+class Person {
+  name; // 필드값을 미리 정의해줘야 에러가 나지 않는다
+  age;
+  constructor (a :string){
+    this.name = a;
+    this.age = 20;
+  }
+}
+//혹은
+class Person {
+  name;
+  age;
+  constructor ( a = 'kim' ){ //자동지정
+    this.name = a;
+    this.age = 20;
+  }
+} 
+```
+## Object에 쓸 수 있는 interface 문법 
+- object 자료형의 타입을 보다 편리하게 지정가능
+- type alias와 용도와 기능 동일
+1. 대문자로 작명하고 
+2. { } 안에 타입을 명시
+```javascript
+interface Square { 
+  color :string, 
+  width :number, 
+} 
+
+let 네모 :Square = { color : 'red', width : 100 } 
+```
+- 중복을 줄일 수 있다.
+```javascript
+interface Student {
+  name :string,
+}
+interface Teacher extends Student {
+  age :number // name, age 속성을 가짐
+}
+```
+### type alias와의 차이점
+- type alias의 경우 extends는 안되고 & 기호를 쓰면 object 두개를 합칠 수 있다
+- interface도 type처럼 & 기호를 이용해도 복사가능
+```javascript
+type Animal = {   name :string } 
+type Cat = Animal & { legs: number }
+```
+- interface의 경우 타입이름 중복선언을 허용. extends 한 것이랑 동일하게 동작
+- type의 경우 중복선언을 허용하지 않는다
