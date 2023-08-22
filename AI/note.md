@@ -136,3 +136,22 @@ for i in range(300): # 경사하강법 300번 해주기
 # 1.5198832 1.6198832
 # 1.5198832 1.6198832
 ```
+
+# Recurrent Neural Network 
+- 한번에 하나의 데이터만 순서대로 넣어 학습
+- 순서가 의미있어지는 딥러닝 학습 가능
+- sequence 데이터를 입출력 가능
+      - sequence : 순서의 개념이 있는 데이터
+- 응용
+    1. vector to sequence (이미지 자동캡션)
+    2. sequence to vector (글의 감정분석하기, 악플검사하기)
+    3. sequence to sequence (번역)
+
+- 단점 : Diminishing Gradient (초기 입력값들의 비중이 낮아져 성능이 낮아짐)
+##  Long Short Term Memory
+- 장기 기억가능 (Cell State)
+      - output : cs + hidden state
+- 구조?
+      1. forget gate : 필요없는 데이터 삭제
+      2. input gate : 중요한 데이터 장기기억으로 보냄
+      3. output gate : hidden state(output) 연산
